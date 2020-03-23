@@ -1,0 +1,44 @@
+.wrapper-todo {
+  margin-bottom: 1rem;
+  background-color: #ffe4e1;
+  padding: 1rem;
+
+  .title {
+    font-size: 3rem;
+  }
+  .list {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+
+    .item {
+      display: flex;
+      align-items: center;
+      margin: 1rem 0;
+      font-size: 2rem;
+
+      &.complete {
+        text-decoration: line-through;
+      }
+
+      &:hover {
+        .tools {
+          display: flex;
+        }
+      }
+
+      .checkbox {
+        margin-right: 10px;
+      }
+
+      .tools {
+        position: absolute;
+        right: 0;
+        display: none;
+      }
+    }
+  }
+  .button {
+    margin-right: 10px;
+  }
+}
