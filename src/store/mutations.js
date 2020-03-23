@@ -10,8 +10,9 @@ export default {
 
   COMPLETE_TODO_ITEM(state, index) { //
     const { list, current } = state.editHistory;
+    list[current].list[index].name = 12;
     list[current].list[index].complete = !list[current].list[index].complete;
-    // console.log(state.editHistory.list.map(i => i.list.map(j => j.complete)))
+    console.log(state.editHistory.list.map(i => i.list.map(j => j.name)))
   },
 
   SET_EDITING(state, todo) { // refactor

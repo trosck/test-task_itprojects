@@ -44,6 +44,7 @@ export default {
 
   completeTodoItem({ commit, getters }, index) {
     const todo = getters.currentTodo;
+    console.log(todo)
 
     commit("CLEAN_OVER");
     commit("CURRENT_BAMP", todo);

@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper" :class="modalType">
+  <div class="wrapper" :class="modalType" ref="modal">
     <div class="inner">
       <div class="title">{{ title }}adsfdskfjask dsf jdsfj sdfDFJK</div>
 
@@ -13,8 +13,8 @@
 
       <div class="footer">
         <slot name="footer">
-          <button class="button btn-primary" @click="handleClick(false)">No</button>
-          <button class="button btn-primary" @click="handleClick(true)">Yes</button>
+          <button class="button btn-primary" @click="handleClick(false)">{{ textButtonLeft }}</button>
+          <button class="button btn-primary" @click="handleClick(true)">{{ textButtonRight }}</button>
         </slot>
       </div>
     </div>
@@ -25,6 +25,14 @@
 export default {
   props: {
     title: String,
+    textButtonLeft: {
+      type: String,
+      default: "No"
+    },
+    textButtonRight: {
+      type: String,
+      default: "Yes"
+    },
     modalType: {
       type: String,
       default: "primary",
@@ -36,17 +44,20 @@ export default {
   methods: {
     handleClick(answer) {
       this.$emit("answer", answer);
-    }
+    },
   },
+  mounted() {
+    console.log(this.$refs)
+    document.body.appendChild(this.$refs.modal)
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .wrapper {
   position: absolute;
-  top: 50%;
-  left: 10%;
-  right: 10%;
+  top: 100px;
+  right: 35%;
   width: 400px;
   z-index: 1000;
   padding: 30px;

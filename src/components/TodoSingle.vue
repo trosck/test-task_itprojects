@@ -26,18 +26,37 @@
         <input 
           type="checkbox" 
           class="checkbox"
-          @change="completeTodo(index)" 
+          @change="complete(index)" 
           :checked="item.complete"
         />
         <span>{{ item.name }}</span>
-        <div class="tools">
-          <button class="button btn-primary">Edit</button>
+        <div class="tools relative">
+
+          <button 
+            class="button btn-primary" 
+            @click="handleEdit(index)"
+          >Edit</button>
+
           <button 
             class="button btn-warning"
             @click="deleteTodoItem(index)"
           >Delete</button>
+
         </div>
       </li>
+      
+        <vue-confirm
+          v-if="modalEdit"
+          @answer="answerEdit"
+          title="Write new todo"
+          textButtonLeft="Cancel"
+          textButtonRight="Apply"
+        >
+          <template v-slot:content>
+            <input v-model="inputEdit" />
+          </template>
+        </vue-confirm>
+        
     </ul>
     <div class="button-group" v-if="fullView">
       <router-link
@@ -64,12 +83,28 @@ export default {
       default: true
     }
   },
+  data() {
+    return {
+      modalEdit: false,
+      inputEdit: ""
+    }
+  },
   methods: {
-    completeTodo(index) {
+    ...mapActions(["deleteTodoItem"]),
+    ...mapMutations(["deleteTodo"]),
+    answerEdit(answer) {
+      if (answer) {
+
+      }
+      this.modalEdit = false;
+    },
+    handleEdit(index) {
+      this.inputEdit = this.todo.list[index].name;
+      this.modalEdit = true;
+    },
+    complete(index) {
       this.$emit("complete", index);
     },
-    ...mapActions(["deleteTodoItem"]),
-    ...mapMutations(["deleteTodo"])
   },
   computed: {
     fullViewList() {
