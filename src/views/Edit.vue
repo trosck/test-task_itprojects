@@ -52,7 +52,7 @@ export default {
     this.setEditing(this.getTodoById(this.id));
   },
   methods: {
-    ...mapActions("todoList", [
+    ...mapActions([
       "addTodoItem",
       "completeTodoItem",
       "setEditing",
@@ -91,7 +91,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters("todoList", ["getTodoById", "currentTodo"])
+    ...mapGetters(["getTodoById", "currentTodo"])
   },
   beforeDestroy() {
     this.cancelEdits();

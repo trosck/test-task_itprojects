@@ -68,8 +68,8 @@ export default {
     completeTodo(index) {
       this.$emit("complete", index);
     },
-    ...mapActions("todoList", ["deleteTodoItem"]),
-    ...mapMutations("todoList", ["deleteTodo"])
+    ...mapActions(["deleteTodoItem"]),
+    ...mapMutations(["deleteTodo"])
   },
   computed: {
     fullViewList() {

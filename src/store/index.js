@@ -3,14 +3,33 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-import TodoList from "./TodoList.module";
-import TodoSingle from "./TodoSingle.module";
+import actions from "./actions";
+import mutations from "./mutations";
+import getters from "./getters";
 
 const store = new Vuex.Store({
-  modules: {
-    todoList: TodoList,
-    todoSingle: TodoSingle,
-  }
+  state() {
+    return {
+      list: [{
+        id: "1",
+        list: [{
+          name: "one",
+          complete: false
+        }, {
+          name: "two",
+          complete: true
+        }],
+        title: "title note"
+      }],
+      editHistory: {
+        current: 0,
+        list: []
+      }
+    }
+  },
+  actions,
+  mutations,
+  getters,
 });
 
 export default store;

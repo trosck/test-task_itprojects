@@ -17,9 +17,7 @@ export default {
     "vue-todo-single": ( ) => import("./TodoSingle.vue"),
   },
   computed: {
-    ...mapState("todoList", [
-      "list"
-    ]),
+    ...mapState(["list"]),
   },
 }
 </script>
