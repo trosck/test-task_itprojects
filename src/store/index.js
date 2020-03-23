@@ -1,15 +1,16 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
-export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
+import TodoList from "./TodoList.module";
+import TodoSingle from "./TodoSingle.module";
+
+const store = new Vuex.Store({
   modules: {
+    todoList: TodoList,
+    todoSingle: TodoSingle,
   }
-})
+});
+
+export default store;
