@@ -1,5 +1,6 @@
 export default {
   ADD_TODO(state, todo) { //
+    console.log(todo)
     state.list.push(todo);
   },
 

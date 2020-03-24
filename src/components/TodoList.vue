@@ -1,11 +1,15 @@
 <template>
   <div class="wrapper-list">
-    <vue-todo-list-item
-    v-for="todo in todoList"
-    :key="todo.id"
-    :todo="todo"
-    @deleteTodo="handleDelete"
-    ></vue-todo-list-item>
+    
+    <div v-if="todoList">
+      <vue-todo-list-item
+      v-for="todo in todoList"
+      :key="todo.id"
+      :todo="todo"
+      @deleteTodo="handleDelete"
+      ></vue-todo-list-item>
+    </div>
+
 
     <vue-confirm
       v-if="modalDelete"
