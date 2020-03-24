@@ -27,7 +27,7 @@ export default {
 
     const _list = [...list];
     _list.splice(index, 1);
-    
+    console.log(index, _list)
     commit("CLEAN_OVER");
     commit("CURRENT_BAMP", { list: _list, id, title });
     commit("REDO_EDIT");
