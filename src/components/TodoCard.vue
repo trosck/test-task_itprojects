@@ -148,12 +148,14 @@ export default {
     },
 
     answerDelete(answer) {
-      this.modalDelete = false;
-      this.indexDelete = null;
-
       if (answer) {
         this.deleteTodoItem(this.indexDelete);
       }
+      
+      this.$nextTick(( ) => {
+        this.modalDelete = false;
+        this.indexDelete = null;
+      })
     }
   },
 }
