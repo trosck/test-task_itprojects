@@ -1,6 +1,5 @@
 export default {
   ADD_TODO(state, todo) { //
-    console.log(todo)
     state.list.push(todo);
   },
 
@@ -16,8 +15,6 @@ export default {
   CHANGE_TODO_ITEM(state, { updateComplete, updateName, updateTitle, index }) {
     const { list, current } = state.editHistory;
     const item = list[current];
-
-    console.log(updateComplete, updateName, updateTitle, index, item.list[index])
     
     if (index >= 0) {
       item.list.splice(index, 1, {
