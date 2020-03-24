@@ -7,7 +7,7 @@ const styles = readFileSync(
 
 module.exports = {
   publicPath: process.env.NODE_ENV === "production"
-    ? "/itprojects/"
+    ? "/itprojects/docs/"
     : "/",
   outputDir: "docs",
   css: {
