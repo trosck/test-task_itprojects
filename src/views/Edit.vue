@@ -3,7 +3,6 @@
     <div class="wrapper">
       <vue-todo-card
         :todo="currentTodo"
-        @complete="completeTodoItem"
       ></vue-todo-card>
     </div>
     <div class="edit-group">
@@ -60,7 +59,6 @@ export default {
   methods: {
     ...mapActions([
       "addTodoItem",
-      "completeTodoItem",
       "setEditing",
       "nextStep",
       "backStep",

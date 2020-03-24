@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper-todo" v-if="todo">
     <div class="title">
-      {{ todo.title }}
+      <span class="name">{{ todo.title }}</span>
 
       <button 
         class="button btn-primary" 
@@ -21,7 +21,7 @@
         <input 
           type="checkbox" 
           class="checkbox"
-          @change="complete(index)" 
+          @change="handleCompleteItem(index)" 
           :checked="item.complete"
         />
 
@@ -42,6 +42,7 @@
         </div>
       </li>
         
+      <!-- confirm for change todo-item/todo-title -->
       <vue-confirm
         v-if="modalEdit"
         @answer="answerEdit"
@@ -59,6 +60,7 @@
         </template>
       </vue-confirm>
 
+      <!-- confirm for delete todo-item -->
       <vue-confirm
         v-if="modalDelete"
         @answer="answerDelete"
@@ -72,6 +74,7 @@
 
 <script>
 import { mapActions } from "vuex";
+import "../assets/todoItem.scss";
 
 export default {
   props: {
@@ -110,22 +113,28 @@ export default {
       this.$nextTick(( ) => this.$refs.inputEdit.focus());
     },
 
+    handleCompleteItem(index) {
+      const { complete, name } = this.todo.list[index];
+      this.changeTodoItem({
+        updateComplete: !complete,
+        updateName: name,
+        index
+      })
+    },
+
     handleDelete(index) {
       this.indexDelete = index;
       this.modalDelete = true;
     },
 
-    complete(index) {
-      this.$emit("complete", index);
-    },
-
-    answerEdit(answer) {
+    answerEdit(answer, complete) {
       if (answer) {
         
         if (this.indexEdit !== null) {
           this.changeTodoItem({
             index: this.indexEdit,
-            updateName: this.inputEdit
+            updateName: this.inputEdit,
+            updateComplete: this.todo.list[this.indexEdit].complete
           })
         } else {
           this.changeTodoItem({
@@ -151,4 +160,19 @@ export default {
 </script>
 
 <style lang="scss">
+.title {
+  position: relative;
+  padding-right: 80px;
+
+  .name {
+    margin: 0;
+    word-break: break-all;
+  }
+
+  .button {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
 </style>

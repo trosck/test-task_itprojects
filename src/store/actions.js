@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 
 
 export default {
-  createTodo({ commit, state }, todoTitle) { //
+  createTodo({ commit }, todoTitle) { //
     const id = uuidv4();
 
     const todo = {
@@ -39,24 +39,6 @@ export default {
     commit("CLEAN_OVER")
     commit("REDO_EDIT");
     commit("CURRENT_BAMP", { list: [...list, todoItem], id, title }); 
-  },
-
-  completeTodoItem({ commit, getters }, index) {
-    const { id, title, list } = getters.currentTodo;
-
-    commit("CLEAN_OVER");
-    commit("REDO_EDIT");
-    commit("CURRENT_BAMP", { id, title, list: [...list] });
-    commit("COMPLETE_TODO_ITEM", index);
-  },
-
-  editTodoItem({ commit, getters }, changes) {
-    const { id, title, list } = getters.currentTodo;
-
-    commit("CLEAN_OVER");
-    commit("REDO_EDIT");
-    commit("CURRENT_BAMP", { id, title, list: [...list] });
-    commit("EDIT_TODO_ITEM", changes);
   },
 
   changeTodoItem({ commit, getters }, changes) {

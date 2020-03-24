@@ -11,29 +11,17 @@
 import { mapState, mapActions } from "vuex";
 
 export default {
-  mounted() {
-    const localList = localStorage.getItem("list");
-    if (localList) {
-      try {
-        const parsed = JSON.parse(localList);
-        this.setStateList(parsed);
-      } catch(error) {
-        localStorage.removeItem("list");
-      }
-    }
+  components: {
+    "vue-todo-list": ( ) => import("@/components/TodoList.vue"),
+    "layout-default": ( ) => import("@/layouts/default.vue")
   },
-
+  
   methods: {
     ...mapActions(["deleteTodo", "setStateList"]),
   },
 
   computed: {
     ...mapState(["list"]),
-  },
-
-  components: {
-    "vue-todo-list": ( ) => import("@/components/TodoList.vue"),
-    "layout-default": ( ) => import("@/layouts/default.vue")
   },
 }
 </script>

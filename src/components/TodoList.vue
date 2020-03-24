@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper-list" v-if="todoList.length">
+  <div class="wrapper-list">
     <vue-todo-list-item
     v-for="todo in todoList"
     :key="todo.id"
@@ -9,7 +9,7 @@
 
     <vue-confirm
       v-if="modalDelete"
-      @answer="handleAnswer"
+      @answer="answerDelete"
       modalType="warning"
     ></vue-confirm>
   </div>
@@ -44,12 +44,14 @@ export default {
       this.idDelete = id;
     },
 
-    handleAnswer(answer) {
+    answerDelete(answer) {
       if (answer) {
         this.$emit("deleteTodo", this.idDelete);
-      }
-      this.modalDelete = false;
-      this.idDelete = null;
+      };
+      this.$nextTick(( ) => {
+        this.modalDelete = false;
+        this.idDelete = null;
+      });
     }
   },
 }
