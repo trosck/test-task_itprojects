@@ -33,16 +33,31 @@ import Todo from "@/components/Todo.vue";
 import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
-    "vue-todo-list": ( ) => import("@/components/TodoList.vue"),
-    "layout-default": ( ) => import("@/layouts/default.vue")
+    "layout-default": LayoutDefault,
+    "tl-confirm": TLConfirm,
+    "tl-modal": TLModal,
+    "todo": Todo
+  },
+
+  data() {
+    return {
+      newTodo: "",
+      modalAdd: false
+    }
   },
   
   methods: {
-    ...mapActions(["deleteTodo", "setStateList"]),
+    ...mapActions(["deleteTodo", "createTodo"]),
+
+    addTodo() {
+      this.createTodo(this.newTodo);
+      this.newTodo = "";
+      this.modalAdd = false;
+    }
   },
 
   computed: {
-    ...mapState(["list"]),
+    ...mapGetters(["ADDITIONAL_LIST"])
   },
 
   components: {
