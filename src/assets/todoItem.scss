@@ -16,6 +16,11 @@
       align-items: center;
       margin: 1rem 0;
       font-size: 2rem;
+      
+      &.relative {
+        word-break: break-all;
+        padding-right: 170px;
+      }
 
       &.complete {
         text-decoration: line-through;
