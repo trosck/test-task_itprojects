@@ -19,5 +19,7 @@ export default {
   margin: 0 auto;
   display: flex;
   flex-flow: column nowrap;
+  max-height: 100vh;
+  min-height: 100vh;
 }
 </style>

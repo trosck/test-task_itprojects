@@ -5,7 +5,7 @@ import store from "./store";
 import router from "./router";
 
 // styles
-import "./assets/index.css";
+import "./assets/index.scss";
 // ======
 
 // global components

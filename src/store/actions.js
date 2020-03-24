@@ -1,13 +1,21 @@
 import { v4 as uuidv4 } from "uuid";
 
+
 export default {
-  createTodo({ commit }, todoTitle) { //
+  createTodo({ commit, state }, todoTitle) { //
     const id = uuidv4();
-    commit("ADD_TODO", {
+
+    const todo = {
       title: todoTitle,
       list: [],
       id,
-    })
+    };
+
+    commit("ADD_TODO", todo);
+  },
+
+  setStateList({ commit }, list) {
+    commit("SET_STATE_LIST", list);
   },
 
   deleteTodo({ commit }, id) {
@@ -15,21 +23,49 @@ export default {
   },
 
   deleteTodoItem({ commit, getters }, index) {
-    const { list, ...todo } = getters.currentTodo;
+    const { list, id, title } = getters.currentTodo;
 
     const _list = [...list];
     _list.splice(index, 1);
     
     commit("CLEAN_OVER");
-    commit("CURRENT_BAMP", { list: _list, ...todo });
+    commit("CURRENT_BAMP", { list: _list, id, title });
     commit("REDO_EDIT");
   },
 
   addTodoItem({ commit, getters }, todoItem) { //
-    const { list, ...todo } = getters.currentTodo;
+    const { id, title, list } = getters.currentTodo;
+
     commit("CLEAN_OVER")
     commit("REDO_EDIT");
-    commit("CURRENT_BAMP", { list: [...list, todoItem], ...todo }); 
+    commit("CURRENT_BAMP", { list: [...list, todoItem], id, title }); 
+  },
+
+  completeTodoItem({ commit, getters }, index) {
+    const { id, title, list } = getters.currentTodo;
+
+    commit("CLEAN_OVER");
+    commit("REDO_EDIT");
+    commit("CURRENT_BAMP", { id, title, list: [...list] });
+    commit("COMPLETE_TODO_ITEM", index);
+  },
+
+  editTodoItem({ commit, getters }, changes) {
+    const { id, title, list } = getters.currentTodo;
+
+    commit("CLEAN_OVER");
+    commit("REDO_EDIT");
+    commit("CURRENT_BAMP", { id, title, list: [...list] });
+    commit("EDIT_TODO_ITEM", changes);
+  },
+
+  changeTodoItem({ commit, getters }, changes) {
+    const { id, title, list } = getters.currentTodo;
+
+    commit("CLEAN_OVER");
+    commit("REDO_EDIT");
+    commit("CURRENT_BAMP", { id, title, list: [...list] });
+    commit("CHANGE_TODO_ITEM", changes);
   },
 
   nextStep({ commit, state }) { //
@@ -42,17 +78,8 @@ export default {
     else commit("UNDO_EDIT");
   },
 
-  completeTodoItem({ commit, getters }, index) {
-    const todo = getters.currentTodo;
-    console.log(todo)
-
-    commit("CLEAN_OVER");
-    commit("CURRENT_BAMP", todo);
-    commit("REDO_EDIT");
-    commit("COMPLETE_TODO_ITEM", index);
-  },
-
-  setEditing({ commit }, todo) {
+  setEditing({ commit, getters }, id) {
+    const todo = getters.getTodoById(id);
     commit("SET_EDITING", todo);
   },
 
@@ -60,8 +87,10 @@ export default {
     commit("CANCEL_EDIT");
   },
 
-  saveEdits({ commit }, id) {
-    commit("SAVE_EDIT", id);
+  saveEdits({ commit, state, getters }, id) {
+    const index = getters.getTodoIndexById(id);
+
+    commit("SAVE_EDIT", index);
     commit("CANCEL_EDIT");
   }
 }

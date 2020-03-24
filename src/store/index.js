@@ -6,30 +6,18 @@ Vue.use(Vuex);
 import actions from "./actions";
 import mutations from "./mutations";
 import getters from "./getters";
+import state from "./state";
 
 const store = new Vuex.Store({
-  state() {
-    return {
-      list: [{
-        id: "1",
-        list: [{
-          name: "one",
-          complete: false
-        }, {
-          name: "two",
-          complete: true
-        }],
-        title: "title note"
-      }],
-      editHistory: {
-        current: 0,
-        list: []
-      }
-    }
-  },
+  state,
   actions,
   mutations,
   getters,
+});
+
+store.subscribe((mutation, state) => {
+  const parsed = JSON.stringify(state.list);
+  localStorage.setItem("list", parsed);
 });
 
 export default store;

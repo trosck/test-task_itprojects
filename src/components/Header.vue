@@ -1,35 +1,45 @@
 <template>
   <div class="wrapper relative">
     <router-link :to="{name: 'index'}" class="logo">Itprojects</router-link>
-    <button class="button btn-primary" @click="newModal = true">Add new +</button>
+    <button class="button btn-primary" @click="handleAddModal">Add new +</button>
 
-    <div class="add-form" v-if="newModal">
+    <div class="add-form" v-if="modalAdd">
       <label for="title">Enter the todo name</label>
-      <input v-model="newTodo" name="title" @keydown.enter="addTodo" />
+      <input v-model="newTodo" name="title" @keydown.enter="addTodo" ref="newTodoInput" />
       <div class="bottom">
         <button class="button btn-primary" @click="cancelAdd">Cancel</button>
-        <button class="button btn-primary" @click="addTodo">Apply</button>
+        <button class="button btn-primary" @click="addTodo" @keydown.enter="addTodo">Apply</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   data() {
     return {
       newTodo: "",
-      newModal: false
+      modalAdd: false
     }
   },
   methods: {
+    ...mapActions(["createTodo"]),
+
     addTodo() {
-      this.$store.dispatch("todoList/createTodo", this.newTodo);
+      this.createTodo(this.newTodo);
       this.cancelAdd();
     },
+
     cancelAdd() {
       this.newTodo = "";
-      this.newModal = false;
+      this.modalAdd = false;
+    },
+
+    handleAddModal() {
+      this.modalAdd = true;
+      this.$nextTick(( ) => this.$refs.newTodoInput.focus());
     }
   },
 }

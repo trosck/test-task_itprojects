@@ -1,15 +1,11 @@
 <template>
   <div class="wrapper" :class="modalType" ref="modal">
     <div class="inner">
-      <div class="title">{{ title }}adsfdskfjask dsf jdsfj sdfDFJK</div>
-
-      <hr>
+      <div class="title">{{ title }}</div>
 
       <div class="content">
-        <slot name="content">asdfksdfk adskf kdsjf ksadfj ksdfj</slot>
+        <slot name="content"></slot>
       </div>
-
-      <hr>
 
       <div class="footer">
         <slot name="footer">
@@ -24,7 +20,10 @@
 <script>
 export default {
   props: {
-    title: String,
+    title: {
+      type: String,
+      default: "Are you sure?"
+    },
     textButtonLeft: {
       type: String,
       default: "No"
@@ -47,7 +46,6 @@ export default {
     },
   },
   mounted() {
-    console.log(this.$refs)
     document.body.appendChild(this.$refs.modal)
   }
 }
@@ -83,6 +81,7 @@ export default {
 }
 
 .content {
+  margin: 10px 0;
   font-size: 1.5rem;
 }
 
