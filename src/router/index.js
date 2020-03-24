@@ -7,7 +7,6 @@ import IndexPage from "../views/Index.vue";
 import EditPage from "../views/Edit.vue";
 
 const router = new VueRouter({
-  mode: "history",
   routes: [{
     path: "/",
     name: "index",
