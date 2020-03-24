@@ -1,49 +1,58 @@
-<template>
-  <layout-default class="relative">
-    <div class="wrapper">
-      <vue-todo-card
-        :todo="currentTodo"
-      ></vue-todo-card>
-    </div>
-    <div class="edit-group">
-      <div class="group">
-        <input v-model="todoItem" @keydown.enter="addItem" />
-        <button 
-          type="submit"
-          @click="addItem"
-          class="button btn-primary"
-        >Add</button>
-      </div>
-      <div class="group">
-        <button class="button btn-primary" @click="cancel">Cancel</button>
-        <button class="button btn-primary" @click="save">Save</button>
-        <button class="button btn-primary" @click="backStep">Undo</button>
-        <button class="button btn-primary" @click="nextStep">Redo</button>
-        <button class="button btn-warning" @click="modalDelete = true">Delete</button>
-      </div>
-    </div>
+<template lang="pug">
+  layout-default( class="relative" )
+    .todo-info(v-if="CURRENT_TODO")
+      .top-buttons
+        i.fas.fa-chevron-left.back(@click="$router.push('/')")
+        i.fas.fa-cog.settings(@click="editTools = !editTools")
 
-    <vue-confirm
-      v-if="modalDelete"
-      modalType="warning"
-      @answer="answerDelete"
-    ></vue-confirm>
+      todo-title.todo-title(
+        :title="CURRENT_TODO.title" 
+        :editable="true"
+        @update:title="title => changeTodoItem({ updateTitle: title })"
+      )
 
-    <vue-confirm
-      v-if="modalCancel"
-      @answer="answerCancel"
-    ></vue-confirm>
+      hr
+      
+      .list
+        ul
+          todo-item(
+            v-for="(item, index) in CURRENT_TODO.list"
+            :key="index"
+            :item="item"
+            :editable="true"
+            @complete="completeTodoItem(item, index)"
+          )
 
-  </layout-default>
+    .add-todo
+      input( v-model="todoItem" @keydown.enter="addItem" )
+      button(
+        type="submit"
+        @click="addItem"
+        class="button btn-primary"
+      ) Add
+
+    transition(name="edit")
+      .edit-todo(v-show="editTools")
+        i.fas.fa-times-circle.icon(@click="cancel" title="Cancel")
+        i.fas.fa-save.icon(@click="save" title="Save")
+        i.fas.fa-undo.icon(@click="backStep" title="Undo")
+        i.fas.fa-redo.icon(@click="nextStep" title="Redo")
+        i.fas.fa-trash.icon(@click="handleDeleteTodo" title="Delete")      
 </template>
 
 <script>
-import { mapGetters, mapActions, mapState, mapMutations } from "vuex";
+import LayoutDefault from "@/layouts/default.vue";
+import TodoTitle from "@/components/TodoTitle.vue";
+import TodoItem from "@/components/TodoItem.vue";
+import TLModal from "@/components/TLModal.vue";
 
+import { mapGetters, mapActions, mapState, mapMutations } from "vuex";
 export default {
   components: {
-    "layout-default": ( ) => import("@/layouts/default.vue"),
-    "vue-todo-card": ( ) => import("@/components/TodoCard.vue"),
+    "layout-default": LayoutDefault,
+    "tl-modal": TLModal,
+    "todo-title": TodoTitle,
+    "todo-item": TodoItem
   },
   props: ["id"], // route params
   data() {
