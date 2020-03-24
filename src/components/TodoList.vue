@@ -63,6 +63,7 @@ export default {
 
 <style lang="scss">
 .wrapper-list {
-  justify-content: flex-start;
+  overflow: auto;
+  max-height: 100%;
 }
 </style>
