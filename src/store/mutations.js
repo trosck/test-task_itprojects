@@ -46,7 +46,7 @@ export default {
   },
 
   SAVE_EDIT(state, index) {
-    state.list[index] = state.editHistory.list[state.editHistory.current];
+    state.list.splice(index, 1, state.editHistory.list[state.editHistory.current])
   },
 
   CLEAN_OVER(state) {

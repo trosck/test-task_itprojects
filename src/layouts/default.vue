@@ -1,25 +1,40 @@
-<template>
-  <div class="container">
-    <vue-header />
-    <slot></slot>
-  </div>
+<template lang="pug">
+  .container
+    .wrapper-container
+      header
+        tl-header
+      main
+        slot
 </template>
 
 <script>
 export default {
   components: {
-    "vue-header": ( ) => import("@/components/Header.vue"),
+    "tl-header": ( ) => import("@/components/TLHeader.vue"),
   }
 }
 </script>
 
-<style lang="scss" scoped>
-.container {
-  width: 500px;
-  margin: 0 auto;
-  display: flex;
-  flex-flow: column nowrap;
-  max-height: 100vh;
-  min-height: 100vh;
-}
+<style lang="sass" scoped>
+.container
+  width: 100%
+  max-height: 100vh
+  min-height: 100vh
+  border: 1px solid black
+  background: rgba(0, 0, 0, 0.3)
+
+  .wrapper-container
+    margin: 0 auto
+    width: 440px
+    height: 100%
+    max-height: 100%
+    display: flex
+    flex-flow: column nowrap
+    position: relative
+
+    main
+      overflow: hidden
+      display: flex
+      flex-flow: column nowrap
+      flex: 1
 </style>
