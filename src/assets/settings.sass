@@ -1,0 +1,44 @@
+// COLORS
+$Warning      : #D21B32
+$Primary      : #CCD7E4
+
+$White        : #ffffff
+$Red          : #C20114
+$LightGrey    : #9B9987
+
+$ScrollColor  : #0E1428
+
+// mixins
+@mixin page-item
+  border: 2px solid $Red
+  border-radius: 10px
+  background: $White
+
+::-webkit-scrollbar
+  width: 2px
+  height: 3px
+
+::-webkit-scrollbar-button
+  background-color: transparent
+
+::-webkit-scrollbar-track
+  background-color: $ScrollColor
+
+::-webkit-scrollbar-track-piece
+  background-color: #eee
+
+::-webkit-scrollbar-thumb
+  height: 50px
+  background-color: $ScrollColor
+  border-radius: 3px
+
+::-webkit-scrollbar-corner
+  background-color: transparent
+
+::-webkit-resizer
+  background-color: $ScrollColor
+
+// Firefox and IE
+*
+  scrollbar-color: $ScrollColor #eee
+  scrollbar-width: thin

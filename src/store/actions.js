@@ -23,7 +23,7 @@ export default {
   },
 
   deleteTodoItem({ commit, getters }, index) {
-    const { list, id, title } = getters.currentTodo;
+    const { list, id, title } = getters.CURRENT_TODO;
 
     const _list = [...list];
     _list.splice(index, 1);
@@ -34,7 +34,7 @@ export default {
   },
 
   addTodoItem({ commit, getters }, todoItem) { //
-    const { id, title, list } = getters.currentTodo;
+    const { id, title, list } = getters.CURRENT_TODO;
 
     commit("CLEAN_OVER")
     commit("REDO_EDIT");
@@ -42,7 +42,7 @@ export default {
   },
 
   changeTodoItem({ commit, getters }, changes) {
-    const { id, title, list } = getters.currentTodo;
+    const { id, title, list } = getters.CURRENT_TODO;
 
     commit("CLEAN_OVER");
     commit("REDO_EDIT");
