@@ -20,12 +20,12 @@ export default {
   width: 100%
   max-height: 100vh
   min-height: 100vh
-  border: 1px solid black
   background: rgba(0, 0, 0, 0.3)
 
   .wrapper-container
     margin: 0 auto
-    width: 440px
+    width: 100%
+    max-width: 440px
     height: 100%
     max-height: 100%
     display: flex
@@ -37,4 +37,5 @@ export default {
       display: flex
       flex-flow: column nowrap
       flex: 1
+      position: relative
 </style>

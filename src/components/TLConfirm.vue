@@ -1,11 +1,14 @@
 <template lang="pug">
 .wrapper-confirm
-  slot(@click="visible = true")
-  .confirm(v-show="visible")
-    .title {{ textTitle }}
-    .buttons
-      button.button.cancel(@click="cancel") {{ textCancel }}
-      button.button.confirm(@click="confirm") {{ textConfirm }}
+  .slot(@click="visible = true")
+    slot
+  template(v-if="visible")
+    transition(name="confirm")
+      .confirm
+        .title {{ textTitle }}
+        .buttons
+          span.button-no(@click="cancel" role="button") {{ textCancel }}
+          span.button-ok(@click="confirm" role="button") {{ textConfirm }}
 </template>
 
 <script>
@@ -40,6 +43,9 @@ export default {
     confirm() {
       this.$emit("confirm");
       this.visible = false;
+    },
+    click() {
+      console.log("children click")
     }
   },
 }
@@ -47,4 +53,20 @@ export default {
 
 <style lang="sass" scoped>
 .wrapper-confirm
+  position: relative
+
+  .confirm
+    position: fixed
+    background: #ffffff
+    padding: 15px
+    box-shadow: 0 0 3px 1px
+    border-radius: 10px
+    transition: all 0.3 ease
+
+    .title
+      font-size: 2rem
+
+.confirm-enter,
+.confirm-leave-active
+  opacity: 0
 </style>
