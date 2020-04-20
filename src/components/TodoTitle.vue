@@ -50,8 +50,6 @@ export default {
 
 <style lang="sass" scoped>
 .wrapper-todo-title
-  width: 100%
-  height: 100%
 
   .title
     display: flex

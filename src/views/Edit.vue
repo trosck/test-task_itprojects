@@ -3,15 +3,18 @@
     .todo-info(v-if="CURRENT_TODO")
       .top-buttons
         i.fas.fa-chevron-left.back(@click="$router.push('/')")
-        i.fas.fa-cog.settings(@click="modalEdit = true")
-      
-      // todo-card( :todo="" )
-      .todo
-        todo-title(:title="CURRENT_TODO.title" :editable="true")
+        i.fas.fa-cog.settings(@click="editTools = !editTools")
 
-        hr
-        
-        ul.list
+      todo-title.todo-title(
+        :title="CURRENT_TODO.title" 
+        :editable="true"
+        @update:title="title => changeTodoItem({ updateTitle: title })"
+      )
+
+      hr
+      
+      .list
+        ul
           todo-item(
             v-for="(item, index) in CURRENT_TODO.list"
             :key="index"
@@ -28,12 +31,13 @@
         class="button btn-primary"
       ) Add
 
-    .edit-todo
-      button.button.btn-primary( @click="cancel" ) Cancel
-      button.button.btn-primary( @click="save" ) Save
-      button.button.btn-primary( @click="backStep" ) Undo
-      button.button.btn-primary( @click="nextStep" ) Redo
-      button.button.btn-warning( @click="handleDeleteTodo" ) Delete      
+    transition(name="edit")
+      .edit-todo(v-show="editTools")
+        i.fas.fa-times-circle.icon(@click="cancel" title="Cancel")
+        i.fas.fa-save.icon(@click="save" title="Save")
+        i.fas.fa-undo.icon(@click="backStep" title="Undo")
+        i.fas.fa-redo.icon(@click="nextStep" title="Redo")
+        i.fas.fa-trash.icon(@click="handleDeleteTodo" title="Delete")      
 </template>
 
 <script>
@@ -56,7 +60,8 @@ export default {
       todoItem: "",
       modalDelete: false,
       modalCancel: false,
-      modalEdit: false
+      modalEdit: false,
+      editTools: false
     }
   },
   mounted() {
@@ -138,17 +143,41 @@ export default {
 .top-buttons
   display: flex
   justify-content: space-between
+  padding: 10px
+  top: 0
 
   .settings, .back
     cursor: pointer
-    font-size: 2rem
+    font-size: 2.5rem
 
     &:hover
       color: $LightGrey
 
+.todo
+  display: flex
+  flex-flow: column nowrap
+  flex: 1
+
+.todo-title
+  padding: 0 10px 10px
+  top: 44px
+
+.todo-title, .top-buttons
+  position: sticky
+  background: $White
+  z-index: 1
+
+.list
+  flex: 1
+  padding: 10px
+
 .todo-info
   @include page-item
   flex: 1
+  display: flex
+  flex-flow: column nowrap
+  overflow: auto
+  position: relative
 
 .add-todo
   @include page-item
@@ -159,18 +188,41 @@ export default {
   input
     flex: 1
 
+// edit tools styles and animations
+
+.edit-leave-active,
+.edit-enter
+  opacity: 0
+
+.edit-enter .edit-todo,
+.edit-leave-active .edit-todo
+  -webkit-transform: scale(1.1)
+  transform: scale(1.1)
+
 .edit-todo
   @include page-item
   display: flex
-  flex-flow: column nowrap
+  justify-content: space-around
+  align-items: center
   position: absolute
   padding: 10px
-  right: -30%
-  top: 30%
-
-  .button
+  transition: all 0.3s ease
+  z-index: 2
+  top: 5px
+  right: 20%
+  left: 20%
+  
+  .icon
+    font-size: 2rem
+    cursor: pointer
     margin-bottom: 10px
-    
+    display: flex
+    justify-content: center
+    margin: 0
+
+    &:hover
+      color: $LightGrey
+
     &:last-child
       margin-bottom: 0
 </style>
