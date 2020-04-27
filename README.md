@@ -2,7 +2,12 @@
 
 # new features plan
 
-- Add the ability to change theme (flowers, night, day and ...hacker theme!)
+- Add the ability to change theme
+  - flowers
+  - night 
+  - day
+  - hacker
+  - and more...
 
 ## Project setup
 ```
