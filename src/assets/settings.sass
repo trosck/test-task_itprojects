@@ -1,18 +1,43 @@
 // COLORS
-$Warning      : #D21B32
-$Primary      : #CCD7E4
+$Warning                  : #D21B32
+$Primary                  : #CCD7E4
 
-$White        : #ffffff
-$Red          : #C20114
-$LightGrey    : #9B9987
+$Blue                     :       #0039A6
+$LightBlue                :       #EEF2FA
+$White                    :       rgb(255, 255, 255)  
+$Black                    :       #000000
+$Red                      :       #D52B1E
+$Purple                   :       #6C89F4
+$Grey                     :       #747474
+$LightGrey                :       #bdbdbd
+$DarkGrey                 :       #222529        
+$Turquoise                :       #03CCBB
 
-$ScrollColor  : #0E1428
+$ScrollColor              : #0E1428
+
+
+$PhoneWidth               : 576px
+$TabletWidth              : 768px
+$SmDesktopWidth           : 992px
+$DesktopWidth             : 1200px
 
 // mixins
 @mixin page-item
   border: 2px solid $Red
   border-radius: 10px
   background: $White
+
+=afs($First, $Second, $Third, $Zero:$First)
+  @media screen and ( max-width: $TabletWidth )
+    font-size: $Second
+  @media screen and ( max-width: $PhoneWidth )
+    font-size: $Third
+  @media screen and ( min-width: $TabletWidth )
+    font-size: $First
+  @media screen and ( min-width: $SmDesktopWidth )
+    font-size: $Zero
+
+// =====
 
 ::-webkit-scrollbar
   width: 2px
