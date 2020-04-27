@@ -1,9 +1,11 @@
 body
   margin: 0
   padding: 0
-  background: repeat url("./background.jpg")
   display: flex
   justify-content: center
+
+  @media screen and (min-width: $TabletWidth)
+  	background: repeat url("./background.jpg")
 
 *
   box-sizing: border-box

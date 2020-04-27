@@ -1,4 +1,8 @@
-# itprojects
+# TodoList
+
+# new features plan
+
+- Add the ability to change theme (flowers, night, day and ...hacker theme!)
 
 ## Project setup
 ```
@@ -14,6 +18,3 @@ npm run serve
 ```
 npm run build
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
