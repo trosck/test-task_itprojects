@@ -1,25 +1,7 @@
 # TodoList
 
-# new features plan
+Test for itprojects: todo list on Vue.   
+Uses LocalStorage for store data.
 
-- Add the ability to change theme
-  - flowers
-  - night 
-  - day
-  - hacker
-  - and more...
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
+# features plan
+- change theme
