@@ -1,3 +1,10 @@
+const { readFileSync } = require('fs')
+const path = require('path')
+const styles = readFileSync(
+  path.resolve('src/assets/settings.sass'),
+  'utf-8'
+)
+
 module.exports = {
   publicPath: process.env.NODE_ENV === "production"
     ? "/itprojects/"
@@ -6,7 +13,7 @@ module.exports = {
   css: {
     loaderOptions: {
       sass: {
-        prependData: `@import "@/assets/settings.sass"`
+        additionalData: styles
       }
     }
   }
