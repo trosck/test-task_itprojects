@@ -11,7 +11,9 @@ layout-default
         hr
 
         .button-group
-          router-link.link.button(:to="{ name: 'Edit', params: { id: todo.id } }") Go to edit
+          router-link.link.button(
+            :to="{ name: 'Edit', params: { id: todo.id } }"
+          ) Go to edit
           tl-confirm
             button.button.button-warning Delete
 

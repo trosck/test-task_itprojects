@@ -10,7 +10,7 @@
         v-model="inputSearch"
       )
       i.fas.fa-search.search-icon
-      
+
   ul.chat-list
     li.list-item.name-image(
       v-for="chat in content"
