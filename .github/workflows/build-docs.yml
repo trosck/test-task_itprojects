@@ -1,0 +1,23 @@
+name: build docs
+
+on:
+  push:
+    branches:
+      - 'main'
+  pull_request:
+    - 'main'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 14
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14.x'
+          cache: 'yarn'
+      - name: 'install dependencies'
+        run: yarn --frozen-lockfile
+      - name: 'build'
+        run: yarn build
