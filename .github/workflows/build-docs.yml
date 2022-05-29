@@ -22,3 +22,8 @@ jobs:
         run: yarn --frozen-lockfile
       - name: 'build'
         run: yarn build
+      - name: update docs
+        uses: stefanzweifel/git-auto-commit-action@v4.14.1
+        with:
+          commit_message: 'update docs'
+
