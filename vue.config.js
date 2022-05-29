@@ -1,3 +1,4 @@
+const parse = require('parse-git-config')
 const { readFileSync } = require('fs')
 const path = require('path')
 const styles = readFileSync(
@@ -5,9 +6,16 @@ const styles = readFileSync(
   'utf-8'
 )
 
+const repositoryName = parse
+  .sync()
+  ['remote "origin"']
+  .url
+  .match(/\/([\w-]+)\.git$/)
+  [1]
+
 module.exports = {
   publicPath: process.env.NODE_ENV === "production"
-    ? "/test_itprojects/"
+    ? `/${repositoryName}/`
     : "/",
   outputDir: "docs",
   css: {
