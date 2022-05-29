@@ -3,18 +3,19 @@ import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
 
-import Index from "../views/Index.vue";
-import Edit from "../views/Edit.vue";
+import IndexPage from "../views/Index.vue";
+import EditPage from "../views/Edit.vue";
 
 const router = new VueRouter({
+  mode: "history",
   routes: [{
     path: "/",
-    name: "Index",
-    component: Index
+    name: "index",
+    component: IndexPage
   }, {
-    path: "/:id",
-    name: "Edit",
-    component: Edit,
+    path: "/:id/edit",
+    name: "edit",
+    component: EditPage,
     props: true
   }]
 });

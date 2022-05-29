@@ -4,14 +4,15 @@ import App from "./App.vue";
 import store from "./store";
 import router from "./router";
 
-// fontawesome
-import "./assets/fontawesome/css/all.min.css"
-// ===========
-
 // styles
-import "./assets/index.sass";
-import "./assets/settings.sass";
+import "./assets/index.css";
 // ======
+
+// global components
+import Confirm from "./components/Confirm.vue";
+
+Vue.component("vue-confirm", Confirm);
+// =================
 
 Vue.config.productionTip = false;
 
