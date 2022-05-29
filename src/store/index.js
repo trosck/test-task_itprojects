@@ -3,21 +3,14 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-import actions from "./actions";
-import mutations from "./mutations";
-import getters from "./getters";
-import state from "./state";
+import TodoList from "./TodoList.module";
+import TodoSingle from "./TodoSingle.module";
 
 const store = new Vuex.Store({
-  state,
-  actions,
-  mutations,
-  getters,
-});
-
-store.subscribe((mutation, state) => {
-  const parsed = JSON.stringify(state.list);
-  localStorage.setItem("list", parsed);
+  modules: {
+    todoList: TodoList,
+    todoSingle: TodoSingle,
+  }
 });
 
 export default store;
