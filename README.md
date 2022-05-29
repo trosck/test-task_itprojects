@@ -1,7 +1,6 @@
 # TodoList
 
-![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/trosck/vue-todo/Build%20and%20Deploy/main)
-![GitHub branch checks state](https://img.shields.io/github/checks-status/trosck/vue-todo/main)
+![ci](https://github.com/trosck/vue-todo/actions/workflows/build-docs.yml/badge.svg)
 
 Test for itprojects: todo list on Vue.   
 Uses LocalStorage for store data.
