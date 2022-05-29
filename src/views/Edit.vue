@@ -37,7 +37,7 @@
         i.fas.fa-save.icon(@click="save" title="Save")
         i.fas.fa-undo.icon(@click="backStep" title="Undo")
         i.fas.fa-redo.icon(@click="nextStep" title="Redo")
-        i.fas.fa-trash.icon(@click="handleDeleteTodo" title="Delete")      
+        i.fas.fa-trash.icon(@click="handleDeleteTodo" title="Delete")
 </template>
 
 <script>
@@ -52,7 +52,7 @@ export default {
     "layout-default": LayoutDefault,
     "tl-modal": TLModal,
     "todo-title": TodoTitle,
-    "todo-item": TodoItem
+    "todo-item": TodoItem,
   },
   props: ["id"], // route params
   data() {
@@ -61,8 +61,8 @@ export default {
       modalDelete: false,
       modalCancel: false,
       modalEdit: false,
-      editTools: false
-    }
+      editTools: false,
+    };
   },
   mounted() {
     this.setEditing(this.id);
@@ -76,14 +76,14 @@ export default {
       "saveEdits",
       "cancelEdits",
       "deleteTodo",
-      "changeTodoItem"
+      "changeTodoItem",
     ]),
 
     addItem() {
       if (!this.todoItem) return;
       this.addTodoItem({
         name: this.todoItem,
-        complete: false
+        complete: false,
       });
       this.todoItem = "";
     },
@@ -94,21 +94,21 @@ export default {
     },
 
     cancel() {
-      this.$nextTick(( ) => this.modalCancel = true);
+      this.$nextTick(() => (this.modalCancel = true));
     },
 
     handleDeleteTodo() {
-      this.$nextTick(( ) => this.modalDelete = true);
+      this.$nextTick(() => (this.modalDelete = true));
     },
 
     answerCancel(answer) {
       this.modalCancel = false;
 
       if (answer) {
-        this.$nextTick(( ) => {
+        this.$nextTick(() => {
           this.cancelEdits();
           this.$router.push("/");
-        })
+        });
       }
     },
 
@@ -116,27 +116,27 @@ export default {
       this.modalDelete = false;
 
       if (answer) {
-        this.$nextTick(( ) => {
+        this.$nextTick(() => {
           this.deleteTodo(this.id);
           this.$router.push("/");
-        })
+        });
       }
     },
     completeTodoItem(item, index) {
       this.changeTodoItem({
         updateComplete: !item.complete,
         updateName: item.name,
-        index
-      })
-    }
+        index,
+      });
+    },
   },
   computed: {
-    ...mapGetters(["CURRENT_TODO"])
+    ...mapGetters(["CURRENT_TODO"]),
   },
   beforeDestroy() {
     this.cancelEdits();
   },
-}
+};
 </script>
 
 <style lang="sass" scoped>
@@ -211,7 +211,7 @@ export default {
   top: 5px
   right: 20%
   left: 20%
-  
+
   .icon
     font-size: 2rem
     cursor: pointer

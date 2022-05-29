@@ -15,7 +15,7 @@ export default {
   CHANGE_TODO_ITEM(state, { updateComplete, updateName, updateTitle, index }) {
     const { list, current } = state.editHistory;
     const item = list[current];
-    
+
     if (index >= 0) {
       item.list.splice(index, 1, {
         name: updateName,

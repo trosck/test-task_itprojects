@@ -1,6 +1,6 @@
 const list = JSON.parse(localStorage.getItem("list")) || [];
 
-export default function() {
+export default function () {
   return {
     list: list,
     editHistory: {
