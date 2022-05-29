@@ -46,7 +46,7 @@ import TodoTitle from "@/components/TodoTitle.vue";
 import TodoItem from "@/components/TodoItem.vue";
 import TLModal from "@/components/TLModal.vue";
 
-import { mapGetters, mapActions, mapState, mapMutations } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   components: {
     "layout-default": LayoutDefault,

@@ -89,8 +89,6 @@ export default {
       this.$emit("sendMessage", this.inputMessage);
       this.inputMessage = "";
 
-      console.log(1 + this.inputMessage + 1);
-
       this.scrollToStart();
     }
   }
