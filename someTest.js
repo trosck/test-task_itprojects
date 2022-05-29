@@ -1,3 +1,0 @@
-class AppDrawer extends HTMLElement {
-  
-}
