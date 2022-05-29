@@ -22,12 +22,12 @@ import TLChat from "@/components/TLChat.vue";
 import TLHeader from "@/components/TLHeader.vue";
 
 function generateString(length) {
-  return (
-    new Array(length).fill().map(( ) => (
-      String.fromCharCode(Math.round(Math.random() * (122 - 97) + 97))
-    )).join("")
-  )
-};
+  return new Array(length)
+    .fill()
+    .map(() => String.fromCharCode(Math.round(Math.random() * (122 - 97) + 97)))
+    .join("");
+}
+
 function randomBoolean() {
   return Math.round(Math.random() * 100) > 50;
 }
@@ -35,19 +35,19 @@ function randomBoolean() {
 export default {
   components: {
     "tl-header": TLHeader,
-    "tl-chat": TLChat
+    "tl-chat": TLChat,
   },
   data() {
     return {
       chat: false,
       currentChat: null,
-      chatList: new Array(12).fill().map((item, index ) => {
+      chatList: new Array(12).fill().map((item, index) => {
         const bool = randomBoolean();
         const last = Math.round(Math.random() * 60) + " минут";
         return {
           id: index,
           image: "",
-          name: "Владимир путин" + index,
+          name: "Jhon Wick " + index,
           lastMessageDate: "22:11",
           lastMessage: generateString(7),
           online: bool,
@@ -56,37 +56,37 @@ export default {
             info: {
               image: "",
               online: bool,
-              name: "Владимир путин" + index,
-              lastOnline: last
+              name: "Jhon Wick " + index,
+              lastOnline: last,
             },
-            messages: new Array(23).fill().map(( ) => {
+            messages: new Array(23).fill().map(() => {
               const self = Math.round(Math.random() * 100) > 50; // random boolean value
               const text = generateString(10);
               return {
                 text,
-                self
-              }
-            })
-          }
-        }
+                self,
+              };
+            }),
+          },
+        };
       }),
-    }
+    };
   },
   methods: {
     sendMessage(message) {
       this.chatList[this.currentChat].dialogData.messages.push({
         text: message,
-        self: true
-      })
-      setTimeout(( ) => {
+        self: true,
+      });
+      setTimeout(() => {
         this.chatList[this.currentChat].dialogData.messages.push({
           text: generateString(10),
-          self: false
-        })
+          self: false,
+        });
       }, 1000);
-    }
+    },
   },
-}
+};
 </script>
 
 <style lang="sass" scoped>
