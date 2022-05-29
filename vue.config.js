@@ -6,10 +6,10 @@ const styles = readFileSync(
 )
 
 module.exports = {
-  publicPath: process.env.NODE_ENV === "production"
+  publicPath: process.env.NODE_ENV === 'production'
     ? '/vue-todo/'
-    : "/",
-  outputDir: "docs",
+    : '/',
+  outputDir: 'docs',
   css: {
     loaderOptions: {
       sass: {
