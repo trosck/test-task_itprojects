@@ -36,16 +36,16 @@ export default {
     "layout-default": LayoutDefault,
     "tl-confirm": TLConfirm,
     "tl-modal": TLModal,
-    "todo": Todo
+    todo: Todo,
   },
 
   data() {
     return {
       newTodo: "",
-      modalAdd: false
-    }
+      modalAdd: false,
+    };
   },
-  
+
   methods: {
     ...mapActions(["deleteTodo", "createTodo"]),
 
@@ -53,13 +53,13 @@ export default {
       this.createTodo(this.newTodo);
       this.newTodo = "";
       this.modalAdd = false;
-    }
+    },
   },
 
   computed: {
-    ...mapGetters(["ADDITIONAL_LIST"])
+    ...mapGetters(["ADDITIONAL_LIST"]),
   },
-}
+};
 </script>
 
 <style lang="sass" scoped>
@@ -96,7 +96,7 @@ export default {
   .button
     font-size: 1.7rem
 
-.add-form 
+.add-form
   display: grid
   grid-template-columns: 2fr 1fr
   column-gap: 10px
